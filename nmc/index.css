@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global Styles */
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* Tailwind Utilities (if needed, though CDN is used) */
+@layer utilities {
+    .z-60 {
+        z-index: 60;
+    }
+}
+
+/* Mobile-first resets */
+* {
+    box-sizing: border-box;
+}
+
+/* Ensure full height for app root */
+#root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}

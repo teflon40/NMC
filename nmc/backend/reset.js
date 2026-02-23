@@ -1,0 +1,1 @@
+const { PrismaClient } = require('@prisma/client'); const bcrypt = require('bcrypt'); const prisma = new PrismaClient(); async function m() { const hash = await bcrypt.hash('12345678', 10); await prisma.user.updateMany({ where: { username: { in: ['ASAM', 'DANIM', 'nmtc-teshie', 'JAYEH', 'Jessel'] } }, data: { passwordHash: hash } }); console.log('Passwords reset!'); } m();

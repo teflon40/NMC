@@ -1,0 +1,46 @@
+backend/prisma.config.ts(4,30): error TS2307: Cannot find module 'prisma/config' or its corresponding type declarations.
+backend/src/__tests__/auth.test.ts(14,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+backend/src/__tests__/auth.test.ts(16,5): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+backend/src/__tests__/auth.test.ts(17,9): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+backend/src/__tests__/auth.test.ts(22,13): error TS2304: Cannot find name 'expect'.
+backend/src/__tests__/auth.test.ts(23,13): error TS2304: Cannot find name 'expect'.
+backend/src/__tests__/auth.test.ts(24,13): error TS2304: Cannot find name 'expect'.
+backend/src/__tests__/auth.test.ts(27,9): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+backend/src/__tests__/auth.test.ts(32,13): error TS2304: Cannot find name 'expect'.
+backend/src/__tests__/auth.test.ts(33,13): error TS2304: Cannot find name 'expect'.
+backend/src/__tests__/auth.test.ts(38,5): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+backend/src/__tests__/auth.test.ts(39,9): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+backend/src/__tests__/auth.test.ts(49,13): error TS2304: Cannot find name 'expect'.
+backend/src/__tests__/auth.test.ts(54,5): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+backend/src/__tests__/auth.test.ts(55,9): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+backend/src/__tests__/auth.test.ts(60,13): error TS2304: Cannot find name 'expect'.
+backend/src/__tests__/auth.test.ts(61,13): error TS2304: Cannot find name 'expect'.
+backend/src/__tests__/auth.test.ts(64,9): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+backend/src/__tests__/auth.test.ts(69,13): error TS2304: Cannot find name 'expect'.
+backend/src/__tests__/auth.test.ts(74,5): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+backend/src/__tests__/auth.test.ts(75,9): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+backend/src/__tests__/auth.test.ts(77,13): error TS2304: Cannot find name 'expect'.
+backend/src/__tests__/auth.test.ts(80,9): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+backend/src/__tests__/auth.test.ts(82,13): error TS2304: Cannot find name 'expect'.
+backend/src/__tests__/auth.test.ts(85,9): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+backend/src/__tests__/auth.test.ts(87,13): error TS2304: Cannot find name 'expect'.
+backend/src/__tests__/auth.test.ts(90,9): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+backend/src/__tests__/auth.test.ts(92,13): error TS2304: Cannot find name 'expect'.
+backend/src/__tests__/auth.test.ts(97,5): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+backend/src/__tests__/auth.test.ts(98,9): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+backend/src/__tests__/auth.test.ts(103,13): error TS2304: Cannot find name 'expect'.
+backend/src/__tests__/auth.test.ts(104,13): error TS2304: Cannot find name 'expect'.
+backend/src/__tests__/auth.test.ts(107,9): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+backend/src/__tests__/auth.test.ts(112,13): error TS2304: Cannot find name 'expect'.
+backend/src/__tests__/auth.test.ts(113,13): error TS2304: Cannot find name 'expect'.
+backend/src/__tests__/health.test.ts(4,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+backend/src/__tests__/health.test.ts(5,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+backend/src/__tests__/health.test.ts(8,9): error TS2304: Cannot find name 'expect'.
+backend/src/__tests__/health.test.ts(9,9): error TS2304: Cannot find name 'expect'.
+backend/src/__tests__/health.test.ts(10,9): error TS2304: Cannot find name 'expect'.
+backend/src/__tests__/health.test.ts(13,5): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+backend/src/__tests__/health.test.ts(16,9): error TS2304: Cannot find name 'expect'.
+backend/src/__tests__/health.test.ts(17,9): error TS2304: Cannot find name 'expect'.
+pages/PracticalReconciliation.tsx(52,40): error TS2339: Property 'procedures' does not exist on type '{ id: number; title: string; category: string; taskCode: string; }'.
+pages/PracticalReconciliation.tsx(93,82): error TS2339: Property 'surname' does not exist on type '{ id: number; indexNo: string; lastname: string; othernames: string; level?: string; programId?: number; program?: { name: string; code: string; maxTasks?: number; }; }'.
+pages/PracticalReconciliation.tsx(93,111): error TS2551: Property 'otherNames' does not exist on type '{ id: number; indexNo: string; lastname: string; othernames: string; level?: string; programId?: number; program?: { name: string; code: string; maxTasks?: number; }; }'. Did you mean 'othernames'?

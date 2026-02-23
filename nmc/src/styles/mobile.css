@@ -1,0 +1,69 @@
+/* Mobile-specific improvements for NMC Admin Dashboard */
+
+/* Ensure proper touch targets on mobile */
+@media (max-width: 768px) {
+
+    /* Minimum touch target size */
+    button,
+    a,
+    [role="button"] {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    /* Prevent text from being too small */
+    body {
+        -webkit-text-size-adjust: 100%;
+    }
+
+    /* Improve table responsiveness */
+    table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Card spacing on mobile */
+    .card,
+    [class*="card"] {
+        margin-bottom: 1rem;
+    }
+
+    /* Form inputs should be full width on mobile */
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="number"],
+    select,
+    textarea {
+        width: 100%;
+        font-size: 16px;
+        /* Prevents zoom on iOS */
+    }
+
+    /* Modal improvements */
+    .modal,
+    [role="dialog"] {
+        max-width: 95vw;
+        margin: 1rem;
+    }
+}
+
+/* Tablet improvements */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+    /* Adjust sidebar for tablets */
+    .sidebar {
+        width: 240px;
+    }
+}
+
+/* Prevent horizontal scroll */
+body {
+    overflow-x: hidden;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}

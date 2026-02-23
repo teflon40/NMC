@@ -1,0 +1,265 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User model for authentication
+model User {
+  id            Int      @id @default(autoincrement())
+  name          String
+  username      String   @unique
+  email         String   @unique
+  passwordHash  String   @map("password_hash")
+  role          UserRole
+  status        String   @default("ACTIVE")
+  forcePasswordChange Boolean @default(true) @map("force_password_change")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  createdResults    ExamResult[] @relation("CreatedByRelation")
+  reconciledResults ExamResult[] @relation("ReconciledByRelation")
+  auditLogs         AuditLog[]
+  analyticsEvents   AnalyticsEvent[]
+
+  @@map("users")
+}
+enum UserRole {
+  ADMINISTRATOR
+  EXAMINER
+}
+
+// Program model
+model Program {
+  id        Int           @id @default(autoincrement())
+  name      String
+  shortName String        @map("short_name")
+  code      String        @unique
+  status    ProgramStatus @default(ACTIVE)
+  maxTasks  Int           @default(2) @map("max_tasks")
+  createdAt DateTime      @default(now()) @map("created_at")
+  updatedAt DateTime      @updatedAt @map("updated_at")
+
+  // Relations
+  students  Student[]
+  examiners Examiner[]
+  tasks     Task[]
+  assessmentTypeLinks AssessmentTypeProgram[]
+
+  @@map("programs")
+}
+
+enum ProgramStatus {
+  ACTIVE
+  DORMANT
+}
+
+// Student model
+model Student {
+  id         Int      @id @default(autoincrement())
+  indexNo    String   @unique @map("index_no")
+  lastname   String
+  othernames String
+  programId  Int      @map("program_id")
+  level      String   @default("Year 1") // Current level
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+  deletedAt  DateTime? @map("deleted_at")
+
+  // Relations
+  program Program      @relation(fields: [programId], references: [id], onDelete: Cascade)
+  results ExamResult[]
+
+  @@map("students")
+}
+
+model AnalyticsEvent {
+  id        Int      @id @default(autoincrement())
+  userId    Int?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  eventType String   // E.g., "page_view", "click", "scroll_depth"
+  pageUrl   String
+  details   Json?
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([eventType])
+  @@index([createdAt])
+  @@map("analytics_events")
+}
+
+
+// Examiner model
+model Examiner {
+  id        Int            @id @default(autoincrement())
+  name      String
+  email     String         @unique
+  phone     String
+  programId Int            @map("program_id")
+  status    ExaminerStatus @default(ACTIVE)
+  createdAt DateTime       @default(now()) @map("created_at")
+  updatedAt DateTime       @updatedAt @map("updated_at")
+
+  // Relations
+  program Program      @relation(fields: [programId], references: [id], onDelete: Cascade)
+  results ExamResult[]
+
+  @@map("examiners")
+}
+
+enum ExaminerStatus {
+  ACTIVE
+  INACTIVE
+}
+
+// Task model
+model Task {
+  id         Int      @id @default(autoincrement())
+  taskCode   String   @unique @map("task_code")
+  programId  Int      @map("program_id")
+  category   String
+  title      String
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  program    Program         @relation(fields: [programId], references: [id], onDelete: Cascade)
+  procedures TaskProcedure[]
+  results    ExamResult[]
+
+  @@map("tasks")
+}
+
+// Task Procedure model
+model TaskProcedure {
+  id          Int      @id @default(autoincrement())
+  taskId      Int      @map("task_id")
+  stepNumber  Int      @map("step_number")
+  description String
+  maxMarks    Int      @map("max_marks")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  // Relations
+  task Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
+
+  @@unique([taskId, stepNumber])
+  @@map("task_procedures")
+}
+
+// Exam Result model (unified for all exam types)
+model ExamResult {
+  id         Int          @id @default(autoincrement())
+  studentId  Int          @map("student_id")
+  examinerId Int?         @map("examiner_id")
+  createdBy  Int          @map("created_by")
+  examType   ExamType     @map("exam_type")
+  taskId     Int?         @map("task_id")
+  caseTitle  String?      @map("case_title")
+  diagnosis  String?
+  procedure  String?
+  score      Float
+  details    Json?        // For storing additional metadata
+  academicYear String?    @map("academic_year") // e.g., "2025/2026"
+  studentLevel String?    @map("student_level") // e.g., "Year 1" (Snapshot)
+  
+  // Dual Examiner Fields
+  assessorNumber    Int?     @map("assessor_number") // 1 or 2
+  reconciliationId  String?  @map("reconciliation_id") // UUID to group both assessments
+  isFinalSubmission Boolean  @default(false) @map("is_final_submission")
+  finalSubmittedBy  Int?     @map("final_submitted_by") // User ID who submitted final
+  reconciliationNotes String? @map("reconciliation_notes")
+  
+  createdAt  DateTime     @default(now()) @map("created_at")
+  updatedAt  DateTime     @updatedAt @map("updated_at")
+  deletedAt  DateTime?    @map("deleted_at")
+
+  // Relations
+  student  Student   @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  examiner Examiner? @relation(fields: [examinerId], references: [id], onDelete: SetNull)
+  creator  User      @relation(name: "CreatedByRelation", fields: [createdBy], references: [id])
+  reconciledByCreator  User? @relation(name: "ReconciledByRelation", fields: [finalSubmittedBy], references: [id])
+  task     Task?     @relation(fields: [taskId], references: [id], onDelete: SetNull)
+
+  @@index([reconciliationId])
+  @@map("exam_results")
+}
+
+enum ExamType {
+  PRACTICAL
+  CARE_STUDY
+  CARE_PLAN
+  OBSTETRICIAN
+}
+
+// Audit Log model for tracking user actions
+model AuditLog {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @map("user_id")
+  action    String   // e.g., "CREATE_RESULT", "DELETE_RESULT", "UPDATE_USER"
+  entity    String   // e.g., "ExamResult", "User", "Student"
+  entityId  Int?     @map("entity_id")
+  details   Json?    // Additional context
+  ipAddress String?  @map("ip_address")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("audit_logs")
+}
+
+// System Settings model for key-value configuration
+model SystemSetting {
+  id    Int    @id @default(autoincrement())
+  key   String @unique // e.g., "SCHOOL_NAME", "SCHOOL_CODE", "CURRENT_YEAR"
+  value String
+  
+  @@map("system_settings")
+}
+
+// Assessment Type configuration
+model AssessmentType {
+  id            Int      @id @default(autoincrement())
+  name          String   @unique // e.g. "Practical Exam"
+  code          String   @unique // e.g. "PRACTICAL"
+  examinerCount Int      @default(1) @map("examiner_count")
+  isActive      Boolean  @default(true) @map("is_active")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  programLinks  AssessmentTypeProgram[]
+
+  @@map("assessment_types")
+}
+
+// Join table: which Programs can write which AssessmentType
+model AssessmentTypeProgram {
+  id               Int            @id @default(autoincrement())
+  assessmentTypeId Int            @map("assessment_type_id")
+  programId        Int            @map("program_id")
+
+  assessmentType   AssessmentType @relation(fields: [assessmentTypeId], references: [id], onDelete: Cascade)
+  program          Program        @relation(fields: [programId], references: [id], onDelete: Cascade)
+
+  @@unique([assessmentTypeId, programId])
+  @@map("assessment_type_programs")
+}
+
+// Revoked refresh tokens — stores SHA-256 hashes for token blacklisting
+model RevokedToken {
+  id        Int      @id @default(autoincrement())
+  tokenHash String   @unique @map("token_hash") // SHA-256 hash of the refresh token
+  expiresAt DateTime @map("expires_at")          // Token's original expiry (for cleanup)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("revoked_tokens")
+}
