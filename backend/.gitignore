@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.env
+*.log
+.DS_Store
+.vscode/
+*.swp
+*.swo
+coverage/
+.nyc_output/
+
+/src/generated/prisma
